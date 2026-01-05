@@ -12,25 +12,21 @@ import matplotlib.pyplot as plt
 from FE_model import DOFs, Nodes, e_all
 
 # Identified eigenfrequencies from singular value spectrum
-freq1 = ***
-freq2 = ***
-freq3 = ***
-freq4 = ***
-freq5 = ***
-freq6 = ***
-freq7 = ***
-freq8 = ***
-***
+freq1 = 0.32
+freq2 = 3.08
+freq3 = 4.84
+freq4 = 9.66
+freq5 = 13.75
 
 # Create freq_id array
-freq_seg = np.load('freq_seg.npy')
-freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6, freq7, freq8, ***])
+freq_seg = np.load('vibration_of_building/freq_seg.npy')
+freq_id = np.array([freq1, freq2, freq3, freq4, freq5])
 indx = [np.argmax(freq_seg > freq_val) for freq_val in freq_id]
 
 # In order to visualize the identified eigenvectors we need to know the coordinates and directions of the measured DOFs. 
 # ---------------------------------------------------------------------------------------------------------------------# 
-sensor_locations = pd.read_csv('sensor_locations.csv')
-S_d = sensor_locations.iloc[:, 1:].to_numpy()
+sensor_locations = pd.read_csv('vibration_of_building/sensor_locations.csv')
+S_d = sensor_locations.iloc[:, :].to_numpy()
 n_d = S_d.shape[0]                           # number of sensors
 
 NodeNr = []
@@ -50,10 +46,10 @@ direction = np.round((S_d.dot(DOFs) % 1) * 100).astype(int)
 
 # Select, normalize and plot:
 # --------------------------#
-U_omega = np.load('U_omega.npy')
+U_omega = np.load('vibration_of_building/U_omega.npy')
 Phi_id = np.zeros((n_d, len(indx)))
 for ind in range(len(indx)):
-    Phi_id[:, ind] = ***
+    Phi_id[:, ind] = U_omega[indx[ind], :, 0].real
     Phi_id[:, ind] = Phi_id[:, ind] / np.linalg.norm(Phi_id[:, ind])
 
     node_number_to_index = {int(node_number[0]): index for index, node_number in enumerate(NodeNr)}
@@ -104,4 +100,4 @@ for ind in range(len(indx)):
     plt.show()
 
 # Save identified eigendata for model updating step
-np.save('identified_eigdata.npy', {'Phi_id': Phi_id, 'freq_id': freq_id, 'ind_d': ind_d})
+np.save('vibration_of_building/identified_eigdata.npy', {'Phi_id': Phi_id, 'freq_id': freq_id, 'ind_d': ind_d})
