@@ -672,3 +672,5 @@ for i in modes:
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
     plt.show()   
+
+    np.save('vibration_of_building/Phi', Phi)
