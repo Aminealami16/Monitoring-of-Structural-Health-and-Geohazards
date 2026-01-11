@@ -97,6 +97,7 @@ for ind in range(len(indx)):
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
     plt.grid()
+    plt.savefig(f'vibration_of_building/identified_mode_{ind + 1}.png', dpi=300)
     plt.show()
 
 # Save identified eigendata for model updating step
