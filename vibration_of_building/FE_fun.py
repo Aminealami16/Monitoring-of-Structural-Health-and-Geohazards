@@ -47,13 +47,13 @@ def FE_fun(x):
     E_floor1 = 35e9       # Young's modulus [N/m2]
     rho_floor1 = 2500     # concrete density [kg/m3]
     nu_floor1 = 0.25      # Poisson's ratio [-]
-    mass_floor1 = 5000   # mass per unit length [kg/m]
+    mass_floor1 = 6000   # mass per unit length [kg/m]
 
     # - material 3: M30 concrete (floor group II)
     E_floor2 = 30e9       # Young's modulus [N/m2]
     rho_floor2 = 2200     # concrete density [kg/m3]
     nu_floor2 = 0.25      # Poisson's ratio [-]
-    mass_floor2 = 5000   # mass per unit length [kg/m]
+    mass_floor2 = 2000   # mass per unit length [kg/m]
 
     
     # assign function input by overwriting variables to be used

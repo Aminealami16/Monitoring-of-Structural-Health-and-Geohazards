@@ -15,9 +15,9 @@ def RunOptim():
     
     #Define variables and axes names
     x1 = np.arange(1, 30, 0.5)           # Define the parameter space for each variable 
-    x2 = np.arange(5000, 20000, 500)           # Define the parameter space for each variable
-    x1txt = 'E-Modulus Columns'                 # Variable name for axis labels  
-    x2txt = 'E-Modulus Floor Group I'           # Variable name for axis labels             
+    x2 = np.arange(1000, 10000, 500)           # Define the parameter space for each variable
+    x1txt = 'k bottom'                 # Variable name for axis labels  
+    x2txt = 'mass floor 2'           # Variable name for axis labels             
     
     # Define scale factors
     sclx1 = np.max(x1)
