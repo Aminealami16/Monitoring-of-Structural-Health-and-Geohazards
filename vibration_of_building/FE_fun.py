@@ -57,7 +57,7 @@ def FE_fun(x):
     
     # assign function input by overwriting variables to be used
     E_col = x[0]  # Young's modulus of column
-    k_top = x[1]  # kinematic constraint factor of top floor group
+    E_floor1 = x[1]  # Young's modulus of floor group I
     
     # floor groups
     floor1 = [0, 1]       # floor numbers in floor bottoms
@@ -256,7 +256,7 @@ def FE_fun(x):
     # ---------------------------------------- DOF of sensor locations ---------------------------------------------- #
     # get the corresponding DOF of sensor locations
     sensor_locations = pd.read_csv('sensor_locations.csv')
-    S_d_array = sensor_locations.iloc[:, 1:].to_numpy()
+    S_d_array = sensor_locations.iloc[:, :].to_numpy()
     
     n_d = S_d_array.shape[0]
     sensor_dofs = []
