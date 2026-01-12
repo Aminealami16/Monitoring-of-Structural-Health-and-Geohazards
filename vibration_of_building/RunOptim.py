@@ -14,14 +14,14 @@ def RunOptim():
     from scipy.optimize import minimize
     
     #Define variables and axes names
-    x1 = ***                # Define the parameter space for each variable 
-    x2 = ***
-    x1txt = '***'           # Variable name for axis labels  
-    x2txt = '***'               
+    x1 = np.arange(1e9, 75e9, 1e9)            # Define the parameter space for each variable 
+    x2 = np.arange(1, 100, 100)
+    x1txt = 'E-Modulus Columns'           # Variable name for axis labels  
+    x2txt = 'k top floors'               
     
     # Define scale factors
-    sclx1 = ***  
-    sclx2 = *** 
+    sclx1 = np.max(x1)
+    sclx2 = np.max(x2)
     
     # Scale variables - these are scaled back inside ObjFun.py!
     x1 = x1/sclx1
@@ -43,7 +43,7 @@ def RunOptim():
     # Setup optimization: set bounds and initial guess for optimization variables
     b1 = [x1[0], x1[-1]]          # b1: bounds variable 1 - scaled
     b2 = [x2[0], x2[-1]]          # b2: bounds variable 2 - scaled
-    x0 = [***, ***]               # x0: initial guess - scaled
+    x0 = [30e9/sclx1, 50/sclx2]   # x0: initial guess - scaled
 
     # Set output function
     def outfun(x):

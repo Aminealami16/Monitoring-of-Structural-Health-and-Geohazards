@@ -42,8 +42,8 @@ def ObjFun(x, sclx1, sclx2):
     # Formulate a cost function and loop over identified modes/frequencies, use:  
     # - freq_ids(i)  : matched identified i^th frequency
     # - Phi_ids(:,i) : matched identified i^th mode  
-    # - freq_s(i)    : matched computed i^th frequency
-    # - Phi_s(:,i)   : matched computed i^th mode 
+    # - freq_ms(i)    : matched computed i^th frequency
+    # - Phi_ms(:,i)   : matched computed i^th mode 
     #
     # - maxnomod     :specify maximum number of modes to be used 
     #                   * 1) can be used to limit the number of modes to less than the number of matched modes  
@@ -54,7 +54,7 @@ def ObjFun(x, sclx1, sclx2):
     #---------------------------------------------------------------------------------------------------------#
     
     # Define a maxium number of modes to be used
-    maxnomod = ***
+    maxnomod = 5
     #print(min(maxnomod, nmatch))
     
     T1 = np.zeros((min(maxnomod, nmatch),))        # First term of the cost function
@@ -68,12 +68,13 @@ def ObjFun(x, sclx1, sclx2):
         Phi_ms[:,i] = np.sign(inprod) * Phi_ms[:,i]                  # Switch sign if required
 
         # define a cost function 
-        T1[i] = ***
-        T2[i] = ***
+        T1[i] = (freq_ms[i] - freq_ids[i])**2 / (freq_ids[i]**2)
+        gamma = np.vdot(Phi_ms[:,i], Phi_ids[:,i]) / np.vdot(Phi_ms[:,i], Phi_ms[:,i])
+        T2[i] = np.linalg.norm(Phi_ms[:,i] - gamma * Phi_ids[:,i])**2 / np.linalg.norm(gamma * Phi_ids[:,i])**2
     
     # The objective function is the summation of T1 and T2
     # Note: In order to keep the cost function smooth, it is important to account for a possibly varying number of modes used.
-    f = ***
+    f = np.sum(T1) + np.sum(T2)
     
     return f
     

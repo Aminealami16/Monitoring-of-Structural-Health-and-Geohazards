@@ -56,8 +56,8 @@ def FE_fun(x):
     mass_floor2 = 20000   # mass per unit length [kg/m]
     
     # assign function input by overwriting variables to be used
-    *** = x[0]
-    *** = x[1]
+    E_col = x[0]  # Young's modulus of column
+    k_top = x[1]  # kinematic constraint factor of top floor group
     
     # floor groups
     floor1 = [0, 1]       # floor numbers in floor bottoms

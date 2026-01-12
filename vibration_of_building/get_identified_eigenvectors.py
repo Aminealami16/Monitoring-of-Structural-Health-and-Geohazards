@@ -13,10 +13,10 @@ from FE_model import DOFs, Nodes, e_all
 
 # Identified eigenfrequencies from singular value spectrum
 freq1 = 0.32
-freq2 = 3.08
-freq3 = 4.84
-freq4 = 9.66
-freq5 = 13.75
+freq2 = 1.03
+freq3 = 3.08
+freq4 = 4.76
+freq5 = 6.23
 
 # Create freq_id array
 freq_seg = np.load('vibration_of_building/freq_seg.npy')
