@@ -69,8 +69,7 @@ def ObjFun(x, sclx1, sclx2):
 
         # define a cost function 
         T1[i] = (freq_ms[i] - freq_ids[i])**2 / (freq_ids[i]**2)
-        gamma = np.vdot(Phi_ms[:,i], Phi_ids[:,i]) / np.vdot(Phi_ms[:,i], Phi_ms[:,i])
-        T2[i] = np.linalg.norm(Phi_ms[:,i] - gamma * Phi_ids[:,i])**2 / np.linalg.norm(gamma * Phi_ids[:,i])**2
+        T2[i] = np.linalg.norm(Phi_ms[:,i] - Phi_ids[:,i])**2 / np.linalg.norm(Phi_ids[:,i])**2
     
     # The objective function is the summation of T1 and T2
     # Note: In order to keep the cost function smooth, it is important to account for a possibly varying number of modes used.
