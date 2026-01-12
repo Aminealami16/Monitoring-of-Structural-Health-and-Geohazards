@@ -14,8 +14,8 @@ def RunOptim():
     from scipy.optimize import minimize
     
     #Define variables and axes names
-    x1 = np.arange(10e9, 350e9, 1e9)           # Define the parameter space for each variable 
-    x2 = np.arange(10e9, 350e9, 1e9)           # Define the parameter space for each variable
+    x1 = np.arange(1, 30, 0.5)           # Define the parameter space for each variable 
+    x2 = np.arange(5000, 20000, 500)           # Define the parameter space for each variable
     x1txt = 'E-Modulus Columns'                 # Variable name for axis labels  
     x2txt = 'E-Modulus Floor Group I'           # Variable name for axis labels             
     
@@ -43,7 +43,7 @@ def RunOptim():
     # Setup optimization: set bounds and initial guess for optimization variables
     b1 = [x1[0], x1[-1]]          # b1: bounds variable 1 - scaled
     b2 = [x2[0], x2[-1]]          # b2: bounds variable 2 - scaled
-    x0 = [37e9 / sclx1, 37e9 / sclx2]   # x0: initial guess - scaled
+    x0 = [1 / sclx1, 5000 / sclx2]   # x0: initial guess - scaled
 
     # Set output function
     def outfun(x):
