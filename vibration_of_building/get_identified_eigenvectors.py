@@ -12,15 +12,16 @@ import matplotlib.pyplot as plt
 from FE_model import DOFs, Nodes, e_all
 
 # Identified eigenfrequencies from singular value spectrum
-freq1 = 0.32
-freq2 = 1.03
-freq3 = 3.08
-freq4 = 4.76
-freq5 = 6.23
+freq1 = 0.32  # Zeker
+freq2 = 1.03  # Zeker
+freq3 = 3.08  # Zeker
+freq4 = 4.76  # Frequency komt overeen
+freq5 = 10.93 # Eerste floor mode (calculated 6)
+freq6 = 13.6  # floor mode (calculated 10)
 
 # Create freq_id array
 freq_seg = np.load('vibration_of_building/freq_seg.npy')
-freq_id = np.array([freq1, freq2, freq3, freq4, freq5])
+freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6])
 indx = [np.argmax(freq_seg > freq_val) for freq_val in freq_id]
 
 # In order to visualize the identified eigenvectors we need to know the coordinates and directions of the measured DOFs. 
@@ -97,7 +98,7 @@ for ind in range(len(indx)):
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
     plt.grid()
-    plt.savefig(f'vibration_of_building/identified_mode_{ind + 1}.png', dpi=300)
+    plt.savefig(f'vibration_of_building/figures/identified_mode_{ind + 1}.png', dpi=300)
     plt.show()
 
 # Save identified eigendata for model updating step

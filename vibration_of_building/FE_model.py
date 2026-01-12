@@ -28,7 +28,7 @@ h_col = 0.3           # height of column [m]
 # - section 2: floor group I (bottom two floors)
 b_floor1 = 0.3        # width of beam [m]
 h_floor1 = 0.5        # height of beam [m]
-k_bot = 1             # kinematic constraint factor [-]
+k_bot = 2.9           # kinematic constraint factor [-]   # Original value: 1
 
 # - section 3: floor group II (top three floors)
 b_floor2 = 0.25       # width of beam [m]
@@ -671,6 +671,7 @@ for i in modes:
     plt.grid()
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
+    plt.savefig(f'vibration_of_building/figures/calculated_mode_{i}.png', dpi=300)
     plt.show()   
 
     np.save('vibration_of_building/Phi', Phi)
