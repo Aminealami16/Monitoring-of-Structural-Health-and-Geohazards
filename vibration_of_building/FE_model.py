@@ -671,6 +671,7 @@ for i in modes:
     plt.grid()
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
+    plt.savefig(f'vibration_of_building/figures/calculated_mode_{i}.png', dpi=300)
     plt.show()   
 
     np.save('vibration_of_building/Phi', Phi)

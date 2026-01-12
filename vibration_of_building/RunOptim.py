@@ -14,8 +14,8 @@ def RunOptim():
     from scipy.optimize import minimize
     
     #Define variables and axes names
-    x1 = np.arange(10e9, 50e9, 1e9)           # Define the parameter space for each variable 
-    x2 = np.arange(10e9, 50e9, 1e9)           # Define the parameter space for each variable
+    x1 = np.arange(10e9, 350e9, 1e9)           # Define the parameter space for each variable 
+    x2 = np.arange(10e9, 350e9, 1e9)           # Define the parameter space for each variable
     x1txt = 'E-Modulus Columns'                 # Variable name for axis labels  
     x2txt = 'E-Modulus Floor Group I'           # Variable name for axis labels             
     
