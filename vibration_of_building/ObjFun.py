@@ -54,7 +54,7 @@ def ObjFun(x, sclx1, sclx2):
     #---------------------------------------------------------------------------------------------------------#
     
     # Define a maxium number of modes to be used
-    maxnomod = 3
+    maxnomod = 4
     #print(min(maxnomod, nmatch))
     
     T1 = np.zeros((min(maxnomod, nmatch),))        # First term of the cost function
