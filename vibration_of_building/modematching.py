@@ -31,7 +31,7 @@ def modematching(Phi_id, freq_id, Phi_m, freq_m):
             MAC[i, j] = numerator / denominator
 
     # Set the Threshold for allowing mode pairing
-    ThMAC = 0.5 # 0.75
+    ThMAC = 0.75 # 0.75
 
     # Pairing
     modepairs = np.array([], dtype=int).reshape(0, 2)           # preallocate modepairs

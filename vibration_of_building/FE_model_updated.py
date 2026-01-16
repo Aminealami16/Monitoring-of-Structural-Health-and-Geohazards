@@ -51,7 +51,7 @@ mass_floor1 = 6000   # mass per unit length [kg/m] # Original value: 6000
 E_floor2 = 30e9       # Young's modulus [N/m2]
 rho_floor2 = 2200     # concrete density [kg/m3]
 nu_floor2 = 0.25      # Poisson's ratio [-]
-mass_floor2 = 1029.66   # mass per unit length [kg/m] # Original value: 2000
+mass_floor2 = 1030   # mass per unit length [kg/m] # Original value: 2000
 
 # floor groups
 floor1 = [0, 1]       # floor numbers in floor bottoms
