@@ -256,7 +256,7 @@ def FE_fun(x):
     
     # ---------------------------------------- DOF of sensor locations ---------------------------------------------- #
     # get the corresponding DOF of sensor locations
-    sensor_locations = pd.read_csv('sensor_locations.csv')
+    sensor_locations = pd.read_csv('measurement_data/sensor_locations.csv')
     S_d_array = sensor_locations.iloc[:, :].to_numpy()
     
     n_d = S_d_array.shape[0]

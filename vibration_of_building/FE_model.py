@@ -290,7 +290,7 @@ if dof in dof_to_index:
 
 # ---------------------------------------- DOF of sensor locations ----------------------------------------- #
 # get the corresponding DOF of sensor locations
-sensor_locations = pd.read_csv('vibration_of_building/sensor_locations.csv')
+sensor_locations = pd.read_csv('vibration_of_building/measurement_data/sensor_locations.csv')
 S_d_array = sensor_locations.iloc[:, :].to_numpy()
 
 n_d = S_d_array.shape[0]
@@ -674,4 +674,5 @@ for i in modes:
     plt.savefig(f'vibration_of_building/figures/calculated_mode_{i}.png', dpi=300)
     plt.show()   
 
-    np.save('vibration_of_building/Phi', Phi)
+    # np.save('vibration_of_building/modelled_eigdata', Phi)
+    np.save('vibration_of_building/modelled_eigdata.npy', {'Phi_m': Phi, 'freq_m': Omega / (2*np.pi)})

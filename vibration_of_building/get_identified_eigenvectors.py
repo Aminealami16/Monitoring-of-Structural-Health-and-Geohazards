@@ -30,7 +30,7 @@ indx = [np.argmax(freq_seg > freq_val) for freq_val in freq_id]
 
 # In order to visualize the identified eigenvectors we need to know the coordinates and directions of the measured DOFs. 
 # ---------------------------------------------------------------------------------------------------------------------# 
-sensor_locations = pd.read_csv('vibration_of_building/sensor_locations.csv')
+sensor_locations = pd.read_csv('vibration_of_building/measurement_data/sensor_locations.csv')
 S_d = sensor_locations.iloc[:, :].to_numpy()
 n_d = S_d.shape[0]                           # number of sensors
 
