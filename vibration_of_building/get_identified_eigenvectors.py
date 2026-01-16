@@ -12,20 +12,28 @@ import matplotlib.pyplot as plt
 from FE_model import DOFs, Nodes, e_all
 
 # Identified eigenfrequencies from singular value spectrum
+# freq1 = 0.32
+# freq2 = 1.03
+# freq3 = 3.08
+# freq4 = 4.88
+# freq5 = 7.47
+# freq6 = 9.66
+# freq7 = 10.93
+# freq8 = 13.53
+# freq9 = 13.75
+# freq10 = 14.86
+
 freq1 = 0.32
 freq2 = 1.03
 freq3 = 3.08
-freq4 = 4.88
-freq5 = 7.47
-freq6 = 9.66
-freq7 = 10.93
-freq8 = 13.53
-freq9 = 13.75
-freq10 = 14.86
+freq4 = 4.84
+freq5 = 10.83
+freq6 = 13.75
+freq7 = 14.85
 
 # Create freq_id array
 freq_seg = np.load('vibration_of_building/freq_seg.npy')
-freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6, freq7, freq8, freq9, freq10])
+freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6, freq7])
 indx = [np.argmax(freq_seg > freq_val) for freq_val in freq_id]
 
 # In order to visualize the identified eigenvectors we need to know the coordinates and directions of the measured DOFs. 
