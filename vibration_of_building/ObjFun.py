@@ -62,14 +62,17 @@ def ObjFun(x, sclx1, sclx2):
 
     for i in range(min(maxnomod, nmatch)):         # for the number of matched modes or less
         
+        # First term
+        T1[i] = (freq_ms[i] - freq_ids[i])**2 / (freq_ids[i]**2)
+
         # Normalise eigenmodes and ensure they have the same sign 
         Phi_ms[:,i] = Phi_ms[:,i] / np.linalg.norm(Phi_ms[:,i])      # Extract and normalize mode
         inprod = Phi_ids[:,i].T * Phi_ms[:,i]                        # Compute inner product with identified mode
         Phi_ms[:,i] = np.sign(inprod) * Phi_ms[:,i]                  # Switch sign if required
 
-        # define a cost function 
-        T1[i] = (freq_ms[i] - freq_ids[i])**2 / (freq_ids[i]**2)
-        T2[i] = np.linalg.norm(Phi_ms[:,i] - Phi_ids[:,i])**2 / np.linalg.norm(Phi_ids[:,i])**2
+        # Second term
+        gamma = 1
+        T2[i] = np.linalg.norm(Phi_ms[:, i] - gamma * Phi_ids[:, i])**2 / np.linalg.norm(Phi_ids[:, i])**2
     
     # The objective function is the summation of T1 and T2
     # Note: In order to keep the cost function smooth, it is important to account for a possibly varying number of modes used.

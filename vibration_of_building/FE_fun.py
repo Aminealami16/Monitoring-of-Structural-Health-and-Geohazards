@@ -57,8 +57,8 @@ def FE_fun(x):
 
     
     # assign function input by overwriting variables to be used
-    k_top = x[0]  # Young's modulus of column
-    mass_floor1 = x[1]  # Young's modulus of floor group I
+    k_bot = x[0]  # Young's modulus of column
+    mass_floor2 = x[1]  # Young's modulus of floor group I
     
     # floor groups
     floor1 = [0, 1]       # floor numbers in floor bottoms

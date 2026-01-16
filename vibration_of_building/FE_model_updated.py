@@ -28,12 +28,12 @@ h_col = 0.3           # height of column [m]
 # - section 2: floor group I (bottom two floors)
 b_floor1 = 0.3        # width of beam [m]
 h_floor1 = 0.5        # height of beam [m]
-k_bot = 1           # kinematic constraint factor [-]
+k_bot =  4.49           # kinematic constraint factor [-]   # Original value: 1
 
 # - section 3: floor group II (top three floors)
 b_floor2 = 0.25       # width of beam [m]
 h_floor2 = 0.35       # height of beam [m]
-k_top = 30            # kinematic constraint factor [-] 
+k_top = 30            # kinematic constraint factor [-]  # Original value: 30
 
 # Material properties:
 # - material 1: M40 concrete (left and right columns) 
@@ -45,13 +45,13 @@ nu_col = 0.25         # Poisson's ratio [-]
 E_floor1 = 35e9       # Young's modulus [N/m2]
 rho_floor1 = 2500     # concrete density [kg/m3]
 nu_floor1 = 0.25      # Poisson's ratio [-]
-mass_floor1 = 6000   # mass per unit length [kg/m]
+mass_floor1 = 6000   # mass per unit length [kg/m] # Original value: 6000
 
 # - material 3: M30 concrete (floor group II)
 E_floor2 = 30e9       # Young's modulus [N/m2]
 rho_floor2 = 2200     # concrete density [kg/m3]
 nu_floor2 = 0.25      # Poisson's ratio [-]
-mass_floor2 = 2000.0   # mass per unit length [kg/m]
+mass_floor2 = 1029.66   # mass per unit length [kg/m] # Original value: 2000
 
 # floor groups
 floor1 = [0, 1]       # floor numbers in floor bottoms
@@ -671,8 +671,8 @@ for i in modes:
     plt.grid()
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
-    plt.savefig(f'vibration_of_building/figures/calculated_mode_{i}.png', dpi=300)
+    plt.savefig(f'vibration_of_building/figures/updated_mode_{i}.png', dpi=300)
     plt.show()   
 
     # np.save('vibration_of_building/modelled_eigdata', Phi)
-    np.save('vibration_of_building/modelled_eigdata.npy', {'Phi_m': Phi, 'freq_m': Omega / (2*np.pi)})
+    np.save('vibration_of_building/updated_eigdata.npy', {'Phi_m': Phi, 'freq_m': Omega / (2*np.pi)})
