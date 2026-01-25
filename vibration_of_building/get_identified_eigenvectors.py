@@ -96,8 +96,8 @@ for ind in range(len(indx)):
                 NodeCo1[i][1] += mean_horizontal_displacements[floor_num - 1]  # Apply the mean displacement
 
     # Plot
-    plt.figure()
-    plt.title(f'Identified mode {ind + 1}')
+    plt.figure(figsize=(5, 5))
+    plt.title(f'Identified mode {ind + 1} - {freq_id[ind]:.2f} Hz')
     plt.axis('equal')
     for iElem in np.arange(0, e_all.shape[0]):
         NodeLeft = int(e_all[iElem][0])
