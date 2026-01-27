@@ -215,7 +215,7 @@ e_all = np.vstack((e_coll, e_colr, e_fl1, e_fl2))
 n_elem = e_all.shape[0]
 
 # Plot structure (Structure with nodes and element indices)
-plt.figure(figsize=(8,16))
+plt.figure(figsize=(12, 12))
 overlapping_nodes = {}
 for i in range(nNode):
     coord = (Nodes[i, 1], Nodes[i, 2])
@@ -243,6 +243,7 @@ plt.xlabel('x-coordinate')
 plt.ylabel('y-Coordinate')
 plt.title('Structure with nodes and element Indices')
 plt.grid()
+plt.savefig('vibration_of_building/figures/Structure_with_nodes_and_element_Indices.png', dpi=300)
 plt.show()
 
 # ---------------------------------------- Boundary conditions and DOFs ----------------------------------------- #
