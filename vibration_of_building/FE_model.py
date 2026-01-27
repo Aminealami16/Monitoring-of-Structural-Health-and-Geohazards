@@ -28,12 +28,12 @@ h_col = 0.3           # height of column [m]
 # - section 2: floor group I (bottom two floors)
 b_floor1 = 0.3        # width of beam [m]
 h_floor1 = 0.5        # height of beam [m]
-k_bot = 1             # kinematic constraint factor [-]
+k_bot = 1           # kinematic constraint factor [-]
 
 # - section 3: floor group II (top three floors)
 b_floor2 = 0.25       # width of beam [m]
 h_floor2 = 0.35       # height of beam [m]
-k_top = 30            # kinematic constraint factor [-]
+k_top = 30            # kinematic constraint factor [-] 
 
 # Material properties:
 # - material 1: M40 concrete (left and right columns) 
@@ -45,13 +45,13 @@ nu_col = 0.25         # Poisson's ratio [-]
 E_floor1 = 35e9       # Young's modulus [N/m2]
 rho_floor1 = 2500     # concrete density [kg/m3]
 nu_floor1 = 0.25      # Poisson's ratio [-]
-mass_floor1 = 5000   # mass per unit length [kg/m]
+mass_floor1 = 6000   # mass per unit length [kg/m]
 
 # - material 3: M30 concrete (floor group II)
 E_floor2 = 30e9       # Young's modulus [N/m2]
 rho_floor2 = 2200     # concrete density [kg/m3]
 nu_floor2 = 0.25      # Poisson's ratio [-]
-mass_floor2 = 5000   # mass per unit length [kg/m]
+mass_floor2 = 2000.0   # mass per unit length [kg/m]
 
 # floor groups
 floor1 = [0, 1]       # floor numbers in floor bottoms
@@ -215,7 +215,7 @@ e_all = np.vstack((e_coll, e_colr, e_fl1, e_fl2))
 n_elem = e_all.shape[0]
 
 # Plot structure (Structure with nodes and element indices)
-plt.figure(figsize=(8,16))
+plt.figure(figsize=(12, 12))
 overlapping_nodes = {}
 for i in range(nNode):
     coord = (Nodes[i, 1], Nodes[i, 2])
@@ -243,6 +243,7 @@ plt.xlabel('x-coordinate')
 plt.ylabel('y-Coordinate')
 plt.title('Structure with nodes and element Indices')
 plt.grid()
+plt.savefig('vibration_of_building/figures/Structure_with_nodes_and_element_Indices.png', dpi=300)
 plt.show()
 
 # ---------------------------------------- Boundary conditions and DOFs ----------------------------------------- #
@@ -290,8 +291,8 @@ if dof in dof_to_index:
 
 # ---------------------------------------- DOF of sensor locations ----------------------------------------- #
 # get the corresponding DOF of sensor locations
-sensor_locations = pd.read_csv('vibration_of_building/sensor_locations.csv')
-S_d_array = sensor_locations.iloc[:, 1:].to_numpy()
+sensor_locations = pd.read_csv('vibration_of_building/measurement_data/sensor_locations.csv')
+S_d_array = sensor_locations.iloc[:, :].to_numpy()
 
 n_d = S_d_array.shape[0]
 sensor_dofs = []
@@ -671,4 +672,8 @@ for i in modes:
     plt.grid()
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
+    plt.savefig(f'vibration_of_building/figures/calculated_mode_{i}.png', dpi=300)
     plt.show()   
+
+    # np.save('vibration_of_building/modelled_eigdata', Phi)
+    np.save('vibration_of_building/modelled_eigdata.npy', {'Phi_m': Phi, 'freq_m': Omega / (2*np.pi)})

@@ -12,25 +12,34 @@ import matplotlib.pyplot as plt
 from FE_model import DOFs, Nodes, e_all
 
 # Identified eigenfrequencies from singular value spectrum
-freq1 = ***
-freq2 = ***
-freq3 = ***
-freq4 = ***
-freq5 = ***
-freq6 = ***
-freq7 = ***
-freq8 = ***
-***
+# freq1 = 0.32
+# freq2 = 1.03
+# freq3 = 3.08
+# freq4 = 4.88
+# freq5 = 7.47
+# freq6 = 9.66
+# freq7 = 10.93
+# freq8 = 13.53
+# freq9 = 13.75
+# freq10 = 14.86
+
+freq1 = 0.32
+freq2 = 1.03
+freq3 = 3.08
+freq4 = 4.84
+freq5 = 10.83
+freq6 = 13.75
+freq7 = 14.85
 
 # Create freq_id array
-freq_seg = np.load('freq_seg.npy')
-freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6, freq7, freq8, ***])
+freq_seg = np.load('vibration_of_building/freq_seg.npy')
+freq_id = np.array([freq1, freq2, freq3, freq4, freq5, freq6, freq7])
 indx = [np.argmax(freq_seg > freq_val) for freq_val in freq_id]
 
 # In order to visualize the identified eigenvectors we need to know the coordinates and directions of the measured DOFs. 
 # ---------------------------------------------------------------------------------------------------------------------# 
-sensor_locations = pd.read_csv('sensor_locations.csv')
-S_d = sensor_locations.iloc[:, 1:].to_numpy()
+sensor_locations = pd.read_csv('vibration_of_building/measurement_data/sensor_locations.csv')
+S_d = sensor_locations.iloc[:, :].to_numpy()
 n_d = S_d.shape[0]                           # number of sensors
 
 NodeNr = []
@@ -50,10 +59,10 @@ direction = np.round((S_d.dot(DOFs) % 1) * 100).astype(int)
 
 # Select, normalize and plot:
 # --------------------------#
-U_omega = np.load('U_omega.npy')
+U_omega = np.load('vibration_of_building/U_omega.npy')
 Phi_id = np.zeros((n_d, len(indx)))
 for ind in range(len(indx)):
-    Phi_id[:, ind] = ***
+    Phi_id[:, ind] = U_omega[indx[ind], :, 0].real
     Phi_id[:, ind] = Phi_id[:, ind] / np.linalg.norm(Phi_id[:, ind])
 
     node_number_to_index = {int(node_number[0]): index for index, node_number in enumerate(NodeNr)}
@@ -87,8 +96,8 @@ for ind in range(len(indx)):
                 NodeCo1[i][1] += mean_horizontal_displacements[floor_num - 1]  # Apply the mean displacement
 
     # Plot
-    plt.figure()
-    plt.title(f'Identified mode {ind + 1}')
+    plt.figure(figsize=(5, 5))
+    plt.title(f'Identified mode {ind + 1} - {freq_id[ind]:.2f} Hz')
     plt.axis('equal')
     for iElem in np.arange(0, e_all.shape[0]):
         NodeLeft = int(e_all[iElem][0])
@@ -101,7 +110,8 @@ for ind in range(len(indx)):
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
     plt.grid()
+    plt.savefig(f'vibration_of_building/figures/identified_mode_{ind + 1}.png', dpi=300)
     plt.show()
 
 # Save identified eigendata for model updating step
-np.save('identified_eigdata.npy', {'Phi_id': Phi_id, 'freq_id': freq_id, 'ind_d': ind_d})
+np.save('vibration_of_building/identified_eigdata.npy', {'Phi_id': Phi_id, 'freq_id': freq_id, 'ind_d': ind_d})

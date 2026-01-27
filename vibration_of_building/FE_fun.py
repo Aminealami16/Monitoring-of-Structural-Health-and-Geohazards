@@ -21,43 +21,44 @@ def FE_fun(x):
     B_floor=6             # width of floors [m] -3 to 3
     n_node_col=7          # number of (structural) nodes per column
     n_node_floor=5        # number of (structural) nodes per floor element (excluding column nodes); odd number to allow excitation at floor centre
-    
+
     # Section dimensions:
     # - section 1: left and right columns
     b_col = 0.3           # width of column [m]
     h_col = 0.3           # height of column [m]
-    
+
     # - section 2: floor group I (bottom two floors)
     b_floor1 = 0.3        # width of beam [m]
     h_floor1 = 0.5        # height of beam [m]
     k_bot = 1             # kinematic constraint factor [-]
-    
+
     # - section 3: floor group II (top three floors)
     b_floor2 = 0.25       # width of beam [m]
     h_floor2 = 0.35       # height of beam [m]
     k_top = 30            # kinematic constraint factor [-]
-    
+
     # Material properties:
     # - material 1: M40 concrete (left and right columns) 
     E_col = 40e9          # Young's modulus [N/m2]
     rho_col = 2500        # concrete density [kg/m3]
     nu_col = 0.25         # Poisson's ratio [-]
-    
+
     # - material 2: M35 concrete (floor group I)
     E_floor1 = 35e9       # Young's modulus [N/m2]
     rho_floor1 = 2500     # concrete density [kg/m3]
     nu_floor1 = 0.25      # Poisson's ratio [-]
-    mass_floor1 = 60000   # mass per unit length [kg/m]
-    
+    mass_floor1 = 6000   # mass per unit length [kg/m]
+
     # - material 3: M30 concrete (floor group II)
     E_floor2 = 30e9       # Young's modulus [N/m2]
     rho_floor2 = 2200     # concrete density [kg/m3]
     nu_floor2 = 0.25      # Poisson's ratio [-]
-    mass_floor2 = 20000   # mass per unit length [kg/m]
+    mass_floor2 = 2000   # mass per unit length [kg/m]
+
     
     # assign function input by overwriting variables to be used
-    *** = x[0]
-    *** = x[1]
+    k_bot = x[0]  # Young's modulus of column
+    mass_floor2 = x[1]  # Young's modulus of floor group I
     
     # floor groups
     floor1 = [0, 1]       # floor numbers in floor bottoms
@@ -255,8 +256,8 @@ def FE_fun(x):
     
     # ---------------------------------------- DOF of sensor locations ---------------------------------------------- #
     # get the corresponding DOF of sensor locations
-    sensor_locations = pd.read_csv('sensor_locations.csv')
-    S_d_array = sensor_locations.iloc[:, 1:].to_numpy()
+    sensor_locations = pd.read_csv('measurement_data/sensor_locations.csv')
+    S_d_array = sensor_locations.iloc[:, :].to_numpy()
     
     n_d = S_d_array.shape[0]
     sensor_dofs = []
